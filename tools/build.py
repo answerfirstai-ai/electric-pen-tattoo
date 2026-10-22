@@ -7,7 +7,7 @@ IG='https://www.instagram.com/theelectricpentattoo/'
 DIR='https://www.google.com/maps/search/?api=1&query=The+Electric+Pen+Tattoo+Studio+10751+Magnolia+Blvd+North+Hollywood+CA+91601'
 YELP='https://www.yelp.com/biz/the-electric-pen-tattoo-studio-north-hollywood'
 TDO='https://www.tattoodo.com/studios/ELECTRIC_PEN_TATTOO/'
-V='16'
+V='17'
 def need(t): return f'<span class="need">[NEED: {t}]</span>'
 NAV=[('On the wall','flash/'),('Artists','artists/'),('Visit','visit/')]
 def head(title,desc,path,extra='',extra_pre=''):
@@ -41,7 +41,7 @@ def page(path,title,desc,body,cur='',ld=None,art=()):
 
 ALL=[]
 BUSINESS={"@type":["TattooParlor","LocalBusiness"],"@id":SITE+"#studio","name":NAME,"url":SITE,"telephone":"+1-818-506-8828",
- "logo":SITE+"assets/img/icon-512.png","foundingDate":"2005",
+ "logo":SITE+"assets/img/icon-512.png",
  "address":{"@type":"PostalAddress","streetAddress":"10751 Magnolia Blvd","addressLocality":"North Hollywood","addressRegion":"CA","postalCode":"91601","addressCountry":"US"},
  "areaServed":"North Hollywood, CA","geo":{"@type":"GeoCoordinates","latitude":34.1650733,"longitude":-118.3655833},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"12:00","closes":"20:00"}],"hasMap":DIR,"sameAs":[IG,YELP,TDO],
  "knowsAbout":["Tattooing"],"image":{"@type":"ImageObject","url":SITE+"assets/img/og.jpg","creditText":"Illustrative (AI-generated)"}}
@@ -53,7 +53,7 @@ def ld(path,crumb=None):
 HOURS='Open daily, 12 PM to 8 PM.'
 WALKIN='Listings say walk-ins are welcome; call ahead at (818) 506-8828 to check the wait.'
 
-PRE={'':f'<link rel="preload" as="image" type="image/avif" media="(min-width:901px)" imagesrcset="{BASE}assets/img/hero-d-1280.avif 1280w, {BASE}assets/img/hero-d-1920.avif 1920w, {BASE}assets/img/hero-d-2880.avif 2880w" imagesizes="100vw" fetchpriority="high"><link rel="preload" as="image" type="image/avif" media="(max-width:900px)" imagesrcset="{BASE}assets/img/hero-m-800.avif 800w, {BASE}assets/img/hero-m-1200.avif 1200w, {BASE}assets/img/hero-m-1600.avif 1600w" imagesizes="100vw" fetchpriority="high">'}
+PRE={'':f'<link rel="preload" as="image" type="image/avif" media="(min-width:901px)" imagesrcset="{BASE}assets/img/hero-d-1280.avif 1280w, {BASE}assets/img/hero-d-1920.avif 1920w, {BASE}assets/img/hero-d-2560.avif 2560w, {BASE}assets/img/hero-d-2880.avif 2880w" imagesizes="100vw" fetchpriority="high"><link rel="preload" as="image" type="image/avif" media="(max-width:900px)" imagesrcset="{BASE}assets/img/hero-m-800.avif 800w, {BASE}assets/img/hero-m-1200.avif 1200w, {BASE}assets/img/hero-m-1600.avif 1600w" imagesizes="100vw" fetchpriority="high">'}
 LAB3D='<figcaption class="illus">3D illustration. Not the studio\'s equipment.</figcaption>'
 def machine_pic(sizes,eager=False):
     ss=lambda e:', '.join(f'{BASE}assets/img/machine-{w}.{e} {w}w' for w in (480,800,1024))
@@ -70,7 +70,8 @@ def footer():
 <div class="mbar"><a class="btn btn-y" href="{TEL}">Call</a><a class="btn btn-o" href="{DIR}" target="_blank" rel="noopener">Directions</a></div>'''
 def wall_sec(h='h2'):
     return f'''<section class="sec wallsec" id="work"><{h} class="sec-t">On the wall</{h}><div class="wall">
-<div class="sheet s-big" style="--r:-.6deg">{pin()}{tag("work")}<div class="s-hold"><span class="need">[NEED: shop photos of flash and healed work, from <a href="{IG}" target="_blank" rel="noopener">@theelectricpentattoo</a>, with permission and artist credit]</span></div></div>
+<figure class="sheet s-big s-flash" style="--r:-.6deg">{pin()}<picture><source type="image/avif" srcset="{BASE}assets/img/flash-600.avif 600w, {BASE}assets/img/flash-1024.avif 1024w" sizes="(min-width:901px) 50vw, 92vw"><img src="{BASE}assets/img/flash-1024.webp" srcset="{BASE}assets/img/flash-600.webp 600w, {BASE}assets/img/flash-1024.webp 1024w" sizes="(min-width:901px) 50vw, 92vw" width="1024" height="768" alt="Illustrative: original AI-generated flash sheet with a moth, a hand holding a key, a snake around a lantern, a peony, a crescent eye and a dagger through a lemon" loading="lazy" decoding="async"></picture><figcaption class="cap">Illustrative flash, AI-generated. Not the studio\'s work.</figcaption></figure>
+<div class="sheet s-need" style="--r:.4deg">{pin()}{tag("work")}<span class="need">[NEED: shop photos of flash and healed work, from <a href="{IG}" target="_blank" rel="noopener">@theelectricpentattoo</a>, with permission and artist credit]</span></div>
 <div class="sheet s-svc" style="--r:.9deg">{pin()}{tag("listed")}<h3>Custom tattoos</h3></div>
 <div class="sheet s-svc s2" style="--r:-1.1deg">{pin()}{tag("listed")}<h3>Piercing</h3></div>
 <div class="sheet s-svc s3" style="--r:.5deg">{pin()}{tag("listed")}<h3>Gallery</h3></div>
@@ -82,15 +83,15 @@ def consult_sec(h='h2'):
 def artists_sec(h='h2'):
     return f'''<section class="sec artists" id="artists"><{h} class="sec-t">Artists</{h}><div class="tags-row">
 <div class="sheet ntag" style="--r:-1.5deg">{pin()}<p class="nt-h">Hello, my name is</p><p class="nt-n">Bo Adams</p><p class="nt-r">Owner</p></div>
-<div class="sheet ntag empty" style="--r:1deg">{pin()}<p class="nt-h">Hello, my name is</p><p class="nt-n">{need("roster")}</p></div></div>
-<p class="side-note">Ask about our resident artists and piercer. Call and we'll match your idea to the right person. Bo is listed as owner on the studio's Tattoodo and Yelp pages.</p></section>'''
+<div class="sheet ntag" style="--r:1deg">{pin()}<p class="nt-h">Also on the wall</p><p class="nt-n">Resident artists</p><p class="nt-r">Ask about our resident artists and piercer</p></div></div>
+<p class="side-note">Call and we'll match your idea to the right person. Bo is listed as owner on the studio's Tattoodo and Yelp pages.</p></section>'''
 def visit_sec(h='h2'):
     return f'''<section class="sec visitsec" id="visit"><div class="sheet receipt" style="--r:-.7deg">{pin()}{tag("visit")}<{h}>10751 Magnolia Blvd</{h}><p>North Hollywood, CA 91601</p>
 <p>Open daily, 12 to 8. {WALKIN}</p><div class="ctas">{ctas_core()}</div></div>
 <a class="sheet mapsheet" style="--r:.6deg" href="{DIR}" target="_blank" rel="noopener">{pin()}<picture><source type="image/avif" srcset="{BASE}assets/img/map-360.avif 360w, {BASE}assets/img/map-720.avif 720w" sizes="(min-width:901px) 45vw, 92vw"><img src="{BASE}assets/img/map-720.webp" srcset="{BASE}assets/img/map-360.webp 360w, {BASE}assets/img/map-720.webp 720w" sizes="(min-width:901px) 45vw, 92vw" width="720" height="540" alt="Street map of Magnolia Blvd, North Hollywood, centered on 10751 Magnolia Blvd" loading="lazy" decoding="async"></picture><span class="mk-pin" aria-hidden="true"></span><span class="vh">Open in Google Maps</span><span class="osm">© OpenStreetMap contributors</span></a></section>'''
 MACHINE=f'''<section class="sec machine" id="machine"><div class="m-stage"><div class="m-canvas" aria-hidden="true"></div>{machine_pic("(min-width:901px) 55vw, 92vw")}</div><div class="m-copy"><h2>The coil machine</h2><p>Chrome frame, brass posts, copper coils. A 3D illustration of the classic tool.</p></div></section>'''
 
-home=f'''<section class="hero"><div class="h-bg"><picture><source media="(max-width:900px)" type="image/avif" srcset="{BASE}assets/img/hero-m-800.avif 800w, {BASE}assets/img/hero-m-1200.avif 1200w, {BASE}assets/img/hero-m-1600.avif 1600w" sizes="100vw"><source media="(max-width:900px)" type="image/webp" srcset="{BASE}assets/img/hero-m-800.webp 800w, {BASE}assets/img/hero-m-1200.webp 1200w, {BASE}assets/img/hero-m-1600.webp 1600w" sizes="100vw"><source type="image/avif" srcset="{BASE}assets/img/hero-d-1280.avif 1280w, {BASE}assets/img/hero-d-1920.avif 1920w, {BASE}assets/img/hero-d-2880.avif 2880w" sizes="100vw"><source type="image/webp" srcset="{BASE}assets/img/hero-d-1280.webp 1280w, {BASE}assets/img/hero-d-1920.webp 1920w, {BASE}assets/img/hero-d-2880.webp 2880w" sizes="100vw"><img src="{BASE}assets/img/hero-d-1920.webp" width="2880" height="1620" alt="Illustrative: blank sheets of aged manila paper pinned with brass tacks to a dark green plaster wall under a warm bulb" fetchpriority="high"></picture><span class="h-sweep" aria-hidden="true"></span><span class="h-label">Illustrative scene</span></div><div class="h-copy"><h1>The Electric Pen<span class="vh"> Tattoo Studio</span></h1><p class="lede">Tattoo studio at 10751 Magnolia Blvd, North Hollywood. Open daily, 12 to 8.</p><div class="ctas">{ctas_core()}</div><p class="addr-sm">Serving North Hollywood since 2005 (per the studio).</p></div><div class="h-media hm"><div class="m-canvas" aria-hidden="true"></div>{machine_pic("(min-width:901px) 30vw, 46vw")}</div></section>
+home=f'''<section class="hero"><div class="h-copy"><h1>The Electric Pen<span class="vh"> Tattoo Studio</span></h1><p class="lede">Tattoo studio at 10751 Magnolia Blvd, North Hollywood. Open daily, 12 to 8.</p><div class="ctas">{ctas_core()}</div><p class="addr-sm">Serving North Hollywood since 2005 (per the studio).</p></div><div class="h-bg"><picture><source media="(max-width:900px)" type="image/avif" srcset="{BASE}assets/img/hero-m-800.avif 800w, {BASE}assets/img/hero-m-1200.avif 1200w, {BASE}assets/img/hero-m-1600.avif 1600w" sizes="100vw"><source media="(max-width:900px)" type="image/webp" srcset="{BASE}assets/img/hero-m-800.webp 800w, {BASE}assets/img/hero-m-1200.webp 1200w, {BASE}assets/img/hero-m-1600.webp 1600w" sizes="100vw"><source type="image/avif" srcset="{BASE}assets/img/hero-d-1280.avif 1280w, {BASE}assets/img/hero-d-1920.avif 1920w, {BASE}assets/img/hero-d-2560.avif 2560w, {BASE}assets/img/hero-d-2880.avif 2880w" sizes="100vw"><source type="image/webp" srcset="{BASE}assets/img/hero-d-1280.webp 1280w, {BASE}assets/img/hero-d-1920.webp 1920w, {BASE}assets/img/hero-d-2560.webp 2560w, {BASE}assets/img/hero-d-2880.webp 2880w" sizes="100vw"><img src="{BASE}assets/img/hero-d-1920.webp" width="2880" height="1620" alt="Illustrative: a single sheet of tracing paper pinned to a dark plaster wall, with an original pencil stencil outline of a moth and crescent moon in raking light" fetchpriority="high"></picture><span class="h-sweep" aria-hidden="true"></span><span class="h-label">Illustrative scene</span></div></section>
 {wall_sec()}{consult_sec()}{artists_sec()}{visit_sec()}'''
 page('', 'The Electric Pen Tattoo Studio | Tattoo Shop in North Hollywood','Tattoo studio at 10751 Magnolia Blvd, North Hollywood. Open daily 12-8. Call (818) 506-8828 or get directions.',home,'',ld(''))
 page('artists/','Tattoo Artists | The Electric Pen Tattoo Studio, North Hollywood','Owner Bo Adams and the resident artists at The Electric Pen Tattoo Studio, 10751 Magnolia Blvd, North Hollywood. Call (818) 506-8828.',
