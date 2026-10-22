@@ -141,3 +141,4 @@ p{margin:0 0 1em;max-width:60ch}
 .s-need{padding:18px}.s-need .need{font-size:.95rem}
 .s-big.s-flash{display:block;min-height:0;padding:14px 14px 10px}
 @media (max-width:900px){.hero{display:block;min-height:0;padding-bottom:0}.h-bg{position:relative;inset:auto;z-index:0;margin:24px calc(-1*var(--g)) 0;aspect-ratio:1/1;overflow:hidden}.h-bg img{object-position:50% 88%}.h-bg::after{background:linear-gradient(180deg,var(--wall,#141a17) 0%,transparent 22%)}.hero .h-copy{position:relative}}
+.s-need{padding:44px 18px 18px}
