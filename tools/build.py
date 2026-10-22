@@ -8,7 +8,7 @@ IG='https://www.instagram.com/theelectricpentattoo/'
 DIR='https://www.google.com/maps/search/?api=1&query=The+Electric+Pen+Tattoo+Studio+10751+Magnolia+Blvd+North+Hollywood+CA+91601'
 YELP='https://www.yelp.com/biz/the-electric-pen-tattoo-studio-north-hollywood'
 TDO='https://www.tattoodo.com/studios/ELECTRIC_PEN_TATTOO/'
-V='5'
+V='6'
 def need(t): return f'<span class="need">[NEED: {t}]</span>'
 G=json.load(open(os.path.join(os.path.dirname(__file__),'glyphs.json')))
 
@@ -138,7 +138,7 @@ home=f'''<section class="hero" id="hero"><div class="wall" aria-hidden="true">{w
 page('', 'The Electric Pen Tattoo Studio | Tattoo Shop in North Hollywood','Custom, black and grey, and traditional tattoos plus piercing at 10751 Magnolia Blvd, North Hollywood, since 2005. Walk-ins welcome daily 12-8. Rated 4.7 on Google.',home,'',ld(''),ALL)
 
 art_body=f'''<section class="phead wrap"><h1 class="banner-h"><span>The artists</span></h1><p class="lede">The people behind the needles at The Electric Pen, as named on the studio's listings. {need("confirm current roster with the shop")}</p></section>
-<section class="wrap"><div class="agrid">{artist_cards()}</div></section><section class="wrap cta-band"><h2>Not sure who fits your idea?</h2><p>Call and describe it. The studio will point you to the right artist.</p>{ctas()}</section>'''
+<section class="wrap"><h2 class="vh">Artist roster</h2><div class="agrid">{artist_cards()}</div></section><section class="wrap cta-band"><h2>Not sure who fits your idea?</h2><p>Call and describe it. The studio will point you to the right artist.</p>{ctas()}</section>'''
 page('artists/','Tattoo Artists | The Electric Pen Tattoo Studio, North Hollywood','Meet the artists and piercer at The Electric Pen Tattoo Studio in North Hollywood: owner Bo Adams, Angel “Mr. Monster” and piercer Hanna.',art_body,'artists/',ld('artists/','Artists'),[a for _,_,a in ARTISTS])
 fl_body=f'''<section class="phead wrap"><h1 class="banner-h"><span>The flash wall</span></h1><p class="lede">Traditional flash, the way it hangs in a shop. Every sheet here is an original illustration drawn for this website. None of it is the studio's tattoo work. {need("the studio's own flash sheets + healed work photos, with artist credit")}</p></section>
 <section class="dark"><div class="wrap"><div class="fgrid">{flash_grid()}</div></div></section><section class="wrap cta-band"><h2>See something close?</h2><p>Call the studio and talk it through. They do custom work too.</p>{ctas()}</section>'''
