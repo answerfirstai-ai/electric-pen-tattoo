@@ -159,3 +159,4 @@ background-image:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.45) 50
 .sheet{top:42%;width:min(92vw,560px)}
 }
 @media (max-width:520px){.agrid{grid-template-columns:1fr}.step{grid-template-columns:52px 1fr}.step svg{width:52px;height:52px}}
+.p-artists main>section:nth-child(2){max-width:none;padding-inline:max(clamp(18px,4vw,40px),calc((100vw - 1180px)/2))}

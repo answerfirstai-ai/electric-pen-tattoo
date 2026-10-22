@@ -8,7 +8,7 @@ IG='https://www.instagram.com/theelectricpentattoo/'
 DIR='https://www.google.com/maps/search/?api=1&query=The+Electric+Pen+Tattoo+Studio+10751+Magnolia+Blvd+North+Hollywood+CA+91601'
 YELP='https://www.yelp.com/biz/the-electric-pen-tattoo-studio-north-hollywood'
 TDO='https://www.tattoodo.com/studios/ELECTRIC_PEN_TATTOO/'
-V='6'
+V='7'
 def need(t): return f'<span class="need">[NEED: {t}]</span>'
 G=json.load(open(os.path.join(os.path.dirname(__file__),'glyphs.json')))
 
