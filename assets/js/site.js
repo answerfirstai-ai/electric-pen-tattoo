@@ -38,7 +38,7 @@ $$('.machine,.hm').forEach(sec=>{
         const loop=()=>{m.set(prog.p);m.render()};m.renderer.setAnimationLoop(loop);addEventListener('resize',m.size);
         if(fine)sec.addEventListener('pointermove',e=>m.pointer(e.clientX/innerWidth-.5));
       }catch(e){/* static photo stays */}
-    },{rootMargin:'100% 0px'});io.observe(sec);
+    },{rootMargin:'100% 0px'});const go=()=>{['pointermove','scroll','keydown','touchstart'].forEach(t=>removeEventListener(t,go));io.observe(sec)};['pointermove','scroll','keydown','touchstart'].forEach(t=>addEventListener(t,go,{passive:true,once:true}));
   }else if(!isHero){
     const N=36,img=new Image();img.alt='';img.width=540;img.height=540;let loaded=false,cur=-1;
     const src=i=>`${BASE}assets/img/seq/m${String(i).padStart(2,'0')}.webp`;
