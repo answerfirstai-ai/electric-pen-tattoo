@@ -96,7 +96,7 @@ background-image:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.45) 50
 /* artists */
 .artists{padding-top:clamp(70px,9vw,120px)!important;padding-bottom:clamp(70px,9vw,120px)!important;max-width:none;padding-inline:max(clamp(18px,4vw,40px),calc((100vw - 1180px)/2))}
 .sub{font-size:1.05rem}
-.agrid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:26px}
+.agrid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:26px}
 .acard{position:relative;background:#f6f1e3;padding:16px 16px 20px;box-shadow:var(--sh-sheet);transform:rotate(var(--r));transition:transform .3s ease,box-shadow .3s ease}
 .acard:hover{transform:rotate(0) translateY(-6px);box-shadow:0 2px 0 rgba(0,0,0,.25),0 28px 40px -14px rgba(0,0,0,.6)}
 .aport{position:relative;aspect-ratio:4/4.4;background:var(--skin);border:3px solid var(--ink);display:flex;align-items:center;justify-content:center;margin-bottom:14px;overflow:hidden}
