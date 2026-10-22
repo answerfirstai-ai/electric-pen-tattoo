@@ -164,3 +164,4 @@ p{margin:0 0 1em;max-width:60ch}
 .s-port .stamp{left:4%;right:4%;top:auto;bottom:7%;max-width:none;margin:0;font-size:clamp(14px,1.3vw,17px);transform:rotate(-2deg)}
 .stamp small{display:block;font:500 13px/1.35 var(--ft);text-transform:none;letter-spacing:0;margin-top:4px}.stamp a{color:#fff}
 .machine .m-stage{max-width:480px}.machine .m-fallback img{width:100%;height:auto}
+.ig-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}.ig-c{display:block;line-height:0}.ig-c img{width:100%;height:auto;display:block;max-width:540px}.ig-cred a{color:inherit}
