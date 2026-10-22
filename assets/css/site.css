@@ -159,3 +159,8 @@ p{margin:0 0 1em;max-width:60ch}
 .pf-l{font:700 15px/1.25 var(--ft);text-transform:uppercase;letter-spacing:.05em;color:#121212}
 .s-port .cap{font:500 14px/1.4 var(--ft);margin:.8em 0 0;color:#2a2a2a}
 @media (min-width:901px){.pf-frame{aspect-ratio:1/1}}
+.s-big.s-port{grid-row:1/3;max-width:520px;padding:12px}
+.s-port .f-img img{width:100%;height:auto;display:block}
+.s-port .stamp{left:4%;right:4%;top:auto;bottom:7%;max-width:none;margin:0;font-size:clamp(14px,1.3vw,17px);transform:rotate(-2deg)}
+.stamp small{display:block;font:500 13px/1.35 var(--ft);text-transform:none;letter-spacing:0;margin-top:4px}.stamp a{color:#fff}
+.machine .m-stage{max-width:480px}.machine .m-fallback img{width:100%;height:auto}

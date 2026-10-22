@@ -7,7 +7,7 @@ IG='https://www.instagram.com/theelectricpentattoo/'
 DIR='https://www.google.com/maps/search/?api=1&query=The+Electric+Pen+Tattoo+Studio+10751+Magnolia+Blvd+North+Hollywood+CA+91601'
 YELP='https://www.yelp.com/biz/the-electric-pen-tattoo-studio-north-hollywood'
 TDO='https://www.tattoodo.com/studios/ELECTRIC_PEN_TATTOO/'
-V='18'
+V='19'
 def need(t): return f'<span class="need">[NEED: {t}]</span>'
 NAV=[('On the wall','flash/'),('Artists','artists/'),('Visit','visit/')]
 def head(title,desc,path,extra='',extra_pre=''):
@@ -26,7 +26,8 @@ def header(cur):
     return f'''<a class="skip" href="#main">Skip to content</a><header class="nav"><a class="mark" href="{BASE}" aria-label="{NAME}, home"><span>The Electric Pen</span></a>
 <nav class="dnav" aria-label="Main">{links}</nav><details class="mnav"><summary aria-label="Open menu">Menu</summary><nav aria-label="Mobile">{links}<a class="wl" href="{TEL}">Call {PHONE}</a></nav></details><a class="btn btn-y nav-call" href="{TEL}">Call {PHONE}</a><i class="buzz" aria-hidden="true"></i></header>'''
 def ctas(cls=''): return f'<div class="ctas {cls}"><a class="btn btn-y" href="{TEL}">Call {PHONE}</a><a class="btn btn-o" href="{DIR}" target="_blank" rel="noopener">Directions</a><a class="btn btn-o" href="{IG}" target="_blank" rel="noopener">Instagram</a></div>'
-def footer():
+def footer(body=''):
+    fn=("The machine on this page is a 3D illustration, not the studio's equipment. " if 'machine-' in body else '')+("The hero scene is an AI illustration. " if 'hero-d-' in body else '')
     return f'''<footer class="foot"><div class="fwrap"><div><p class="fname">{NAME}</p><p>10751 Magnolia Blvd, North Hollywood, CA 91601</p>
 <p><a class="wl" href="{TEL}">{PHONE}</a></p><p>Open daily, 12 PM to 8 PM</p></div><nav class="fnav" aria-label="Footer"><p class="flab">Pages</p><a class="wl" href="{BASE}">Home</a><a class="wl" href="{BASE}artists/">Artists</a><a class="wl" href="{BASE}flash/">Work</a><a class="wl" href="{BASE}visit/">Visit</a></nav>
 <div><p class="flab">Find us elsewhere</p><p><a class="wl" href="{IG}" target="_blank" rel="noopener">Instagram</a> · <a class="wl" href="{YELP}" target="_blank" rel="noopener">Yelp</a> · <a class="wl" href="{TDO}" target="_blank" rel="noopener">Tattoodo</a></p>
@@ -35,7 +36,7 @@ def footer():
 SCRIPTS=f'<script src="{BASE}assets/js/gsap.min.js" defer></script><script src="{BASE}assets/js/ScrollTrigger.min.js" defer></script><script src="{BASE}assets/js/site.js?v={V}" defer></script>'
 def page(path,title,desc,body,cur='',ld=None,art=()):
     ldj=f'<script type="application/ld+json">{json.dumps(ld,separators=(",",":"))}</script>' if ld else ''
-    h=head(title,desc,path,ldj,PRE.get(path,''))+f'<body class="p-{cur.strip("/") or "home"}">'+''+header(cur)+f'<main id="main">{body}</main>'+footer()+SCRIPTS+'</body></html>'
+    h=head(title,desc,path,ldj,PRE.get(path,''))+f'<body class="p-{cur.strip("/") or "home"}">'+''+header(cur)+f'<main id="main">{body}</main>'+footer(body)+SCRIPTS+'</body></html>'
     fp=os.path.join(ROOT,path,'index.html') if not path.endswith('.html') else os.path.join(ROOT,path)
     os.makedirs(os.path.dirname(fp),exist_ok=True); open(fp,'w').write(h)
 
@@ -62,19 +63,19 @@ def machine_pic(sizes,eager=False):
 def tag(t): return f'<span class="tag">{t}</span>'
 def pin(): return '<span class="pin" aria-hidden="true"></span>'
 def ctas_core(): return f'<a class="btn btn-y" href="{TEL}">Call {PHONE}</a><a class="btn btn-o" href="{DIR}" target="_blank" rel="noopener">Directions</a>'
-def footer():
+def footer(body=''):
+    fn=("The machine on this page is a 3D illustration, not the studio's equipment. " if 'machine-' in body else '')+("The hero scene is an AI illustration. " if 'hero-d-' in body else '')
     return f'''<footer class="foot"><div class="sheet f-sheet" style="--r:-.4deg">{pin()}{tag("last sheet")}<p class="fname">The Electric Pen</p>
 <p>10751 Magnolia Blvd, North Hollywood 91601. <a class="wl" href="{TEL}">{PHONE}</a>. Open daily, 12 to 8.</p>
 <nav class="fnav" aria-label="Footer"><a class="wl" href="{BASE}">Home</a><a class="wl" href="{BASE}flash/">On the wall</a><a class="wl" href="{BASE}artists/">Artists</a><a class="wl" href="{BASE}visit/">Visit</a><a class="wl" href="{IG}" target="_blank" rel="noopener">Instagram</a><a class="wl" href="{YELP}" target="_blank" rel="noopener">Yelp</a><a class="wl" href="{TDO}" target="_blank" rel="noopener">Tattoodo</a></nav>
-<p class="fnote">The machine on this site is a 3D illustration, not the studio's equipment. Map data © OpenStreetMap contributors.</p></div></footer>
+<p class="fnote">{fn}Map data © OpenStreetMap contributors.</p></div></footer>
 <div class="mbar"><a class="btn btn-y" href="{TEL}">Call</a><a class="btn btn-o" href="{DIR}" target="_blank" rel="noopener">Directions</a></div>'''
 def wall_sec(h='h2'):
     return f'''<section class="sec wallsec" id="work"><{h} class="sec-t">On the wall</{h}><div class="wall">
-<div class="sheet s-big s-port" style="--r:-.6deg">{pin()}<p class="f-t">Your portfolio goes here</p><div class="pf"><div class="pf-frame" style="--r:-1.2deg"><span class="pf-l">Your portfolio goes here</span></div><div class="pf-frame" style="--r:.8deg"><span class="pf-l">Your portfolio goes here</span></div><div class="pf-frame" style="--r:-.4deg"><span class="pf-l">Your portfolio goes here</span></div><div class="pf-frame" style="--r:1.1deg"><span class="pf-l">Your portfolio goes here</span></div></div><p class="cap">Empty frames for the studio\'s own flash and healed work, added only with permission and artist credit.</p></div>
+<figure class="sheet s-big s-port" style="--r:-.6deg">{pin()}<div class="f-img"><picture><source type="image/avif" srcset="{BASE}assets/img/blank-480.avif 480w, {BASE}assets/img/blank-960.avif 960w" sizes="(min-width:901px) 480px, 86vw"><img src="{BASE}assets/img/blank-960.webp" srcset="{BASE}assets/img/blank-480.webp 480w, {BASE}assets/img/blank-960.webp 960w" sizes="(min-width:901px) 480px, 86vw" width="960" height="720" alt="Illustrative: three blank torn sheets of tracing paper pinned to a dark wall in raking light" loading="lazy" decoding="async"></picture><p class="stamp">Sales demo: the studio\'s flash goes here.<small>Real work from <a href="{IG}" target="_blank" rel="noopener">@theelectricpentattoo</a>, added with permission and artist credit.</small></p></div></figure>
 <div class="sheet s-svc s1" style="--r:.9deg">{pin()}{tag("listed")}<svg class="sk" viewBox="0 0 48 48" aria-hidden="true"><path d="M8 40 L30 18 M30 18 l6-6 4 4-6 6 M14 34 l-4 4"/><circle cx="40" cy="10" r="3"/></svg><h3>Custom tattoos</h3><p>Listings say the studio does custom work. Bring a reference; every piece is priced by quote.</p></div>
 <div class="sheet s-svc s2" style="--r:-1.1deg">{pin()}{tag("listed")}<svg class="sk" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="26" r="12"/><circle cx="36" cy="26" r="3"/></svg><h3>Piercing</h3><p>Listings mention piercing. Call ahead to check who is in.</p></div>
 <div class="sheet s-svc s3" style="--r:.5deg">{pin()}{tag("listed")}<svg class="sk" viewBox="0 0 48 48" aria-hidden="true"><rect x="7" y="10" width="34" height="28"/><path d="M12 33 l9-10 6 6 5-5 5 9"/></svg><h3>Gallery</h3><p>Listings mention an art gallery. Ask at the counter what is up now.</p></div>
-<div class="sheet s-need" style="--r:.4deg">{pin()}{tag("work")}<span class="need">[NEED: shop photos of flash and healed work, from <a href="{IG}" target="_blank" rel="noopener">@theelectricpentattoo</a>, with permission and artist credit]</span></div>
 </div></section>'''
 def consult_sec(h='h2'):
     L=["Bring a reference, or pick a sheet off the wall.","Size, placement and a quote at the counter.",f"Deposit and date. {need('deposit policy')}"]
@@ -89,10 +90,10 @@ def visit_sec(h='h2'):
     return f'''<section class="sec visitsec" id="visit"><div class="sheet receipt" style="--r:-.7deg">{pin()}{tag("visit")}<{h}>10751 Magnolia Blvd</{h}><p>North Hollywood, CA 91601</p>
 <p>Open daily, 12 to 8. {WALKIN}</p><div class="ctas">{ctas_core()}</div></div>
 <a class="sheet mapsheet" style="--r:.6deg" href="{DIR}" target="_blank" rel="noopener">{pin()}<picture><source type="image/avif" srcset="{BASE}assets/img/map-360.avif 360w, {BASE}assets/img/map-720.avif 720w" sizes="(min-width:901px) 45vw, 92vw"><img src="{BASE}assets/img/map-720.webp" srcset="{BASE}assets/img/map-360.webp 360w, {BASE}assets/img/map-720.webp 720w" sizes="(min-width:901px) 45vw, 92vw" width="720" height="540" alt="Street map of Magnolia Blvd, North Hollywood, centered on 10751 Magnolia Blvd" loading="lazy" decoding="async"></picture><span class="mk-pin" aria-hidden="true"></span><span class="vh">Open in Google Maps</span><span class="osm">© OpenStreetMap contributors</span></a></section>'''
-MACHINE=f'''<section class="sec machine" id="machine"><div class="m-stage"><div class="m-canvas" aria-hidden="true"></div>{machine_pic("(min-width:901px) 55vw, 92vw")}</div><div class="m-copy"><h2>The coil machine</h2><p>Chrome frame, brass posts, copper coils. A 3D illustration of the classic tool.</p></div></section>'''
+MACHINE=f'''<section class="sec machine" id="machine"><div class="m-stage"><div class="m-canvas" aria-hidden="true"></div>{machine_pic("(min-width:901px) 480px, 92vw")}</div><div class="m-copy"><h2>The coil machine</h2><p>Chrome frame, brass posts, copper coils. A 3D illustration of the classic tool.</p></div></section>'''
 
 home=f'''<section class="hero"><div class="h-copy"><h1>The Electric Pen<span class="vh"> Tattoo Studio</span></h1><p class="lede">Tattoo studio at 10751 Magnolia Blvd, North Hollywood. Open daily, 12 to 8.</p><div class="ctas">{ctas_core()}</div><p class="addr-sm">Serving North Hollywood since 2005 (per the studio).</p></div><div class="h-bg"><picture><source media="(max-width:900px)" type="image/avif" srcset="{BASE}assets/img/hero-m-800.avif 800w, {BASE}assets/img/hero-m-1200.avif 1200w, {BASE}assets/img/hero-m-1600.avif 1600w" sizes="100vw"><source media="(max-width:900px)" type="image/webp" srcset="{BASE}assets/img/hero-m-800.webp 800w, {BASE}assets/img/hero-m-1200.webp 1200w, {BASE}assets/img/hero-m-1600.webp 1600w" sizes="100vw"><source type="image/avif" srcset="{BASE}assets/img/hero-d-1280.avif 1280w, {BASE}assets/img/hero-d-1920.avif 1920w, {BASE}assets/img/hero-d-2560.avif 2560w, {BASE}assets/img/hero-d-2880.avif 2880w" sizes="100vw"><source type="image/webp" srcset="{BASE}assets/img/hero-d-1280.webp 1280w, {BASE}assets/img/hero-d-1920.webp 1920w, {BASE}assets/img/hero-d-2560.webp 2560w, {BASE}assets/img/hero-d-2880.webp 2880w" sizes="100vw"><img src="{BASE}assets/img/hero-d-1920.webp" width="2880" height="1620" alt="Illustrative: a single sheet of tracing paper pinned to a dark plaster wall, with an original pencil stencil outline of a moth and crescent moon in raking light" fetchpriority="high"></picture><span class="h-sweep" aria-hidden="true"></span><span class="h-label">Illustrative scene</span></div></section>
-{wall_sec()}{consult_sec()}{artists_sec()}{visit_sec()}'''
+{wall_sec()}{MACHINE}{consult_sec()}{artists_sec()}{visit_sec()}'''
 page('', 'The Electric Pen Tattoo Studio | Tattoo Shop in North Hollywood','Tattoo studio at 10751 Magnolia Blvd, North Hollywood. Open daily 12-8. Call (818) 506-8828 or get directions.',home,'',ld(''))
 page('artists/','Tattoo Artists | The Electric Pen Tattoo Studio, North Hollywood','Owner Bo Adams and the resident artists at The Electric Pen Tattoo Studio, 10751 Magnolia Blvd, North Hollywood. Call (818) 506-8828.',
  f'<section class="phead"><h1>Artists</h1><p class="lede">The roster changes, so only names the studio confirms go up.</p></section>'+artists_sec('h2')+consult_sec(),'artists/',ld('artists/','Artists'))
