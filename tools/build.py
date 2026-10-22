@@ -7,7 +7,7 @@ IG='https://www.instagram.com/theelectricpentattoo/'
 DIR='https://www.google.com/maps/search/?api=1&query=The+Electric+Pen+Tattoo+Studio+10751+Magnolia+Blvd+North+Hollywood+CA+91601'
 YELP='https://www.yelp.com/biz/the-electric-pen-tattoo-studio-north-hollywood'
 TDO='https://www.tattoodo.com/studios/ELECTRIC_PEN_TATTOO/'
-V='13'
+V='14'
 def need(t): return f'<span class="need">[NEED: {t}]</span>'
 NAV=[('Work','flash/'),('Artists','artists/'),('Visit','visit/')]
 def head(title,desc,path,extra='',extra_pre=''):
@@ -91,7 +91,7 @@ def visit():
 home=(f'<section class="hero"><div class="h-copy"><h1>The Electric Pen<span class="vh"> Tattoo Studio</span></h1>'
  f'<p class="lede">Tattoos on Magnolia Blvd, North Hollywood. Open daily 12–8. Walk-ins: call ahead.</p><div class="ctas">{ctas_core()}</div>'
  f'<p class="addr-sm">10751 Magnolia Blvd · <a class="wl" href="{TEL}">{PHONE}</a><br>Serving North Hollywood since 2005 (per the studio).</p></div>'
- f'<div class="h-media">{pic("wall","h-ph",sizes="(min-width:900px) 58vw, 100vw")}</div></section>'
+ f'<div class="h-media"><figure class="ph h-ph"><picture><source media="(max-width:900px)" type="image/avif" srcset="{BASE}assets/img/herom-390.avif 390w, {BASE}assets/img/herom-720.avif 720w" sizes="calc(100vw - 36px)"><source media="(max-width:900px)" type="image/webp" srcset="{BASE}assets/img/herom-390.webp 390w, {BASE}assets/img/herom-720.webp 720w" sizes="calc(100vw - 36px)"><source type="image/avif" srcset="{BASE}assets/img/herod-640.avif 640w, {BASE}assets/img/herod-1152.avif 1152w" sizes="576px"><source type="image/webp" srcset="{BASE}assets/img/herod-640.webp 640w, {BASE}assets/img/herod-1152.webp 1152w" sizes="576px"><img src="{BASE}assets/img/herod-1152.webp" width="1152" height="720" alt="{ALT['wall']}" fetchpriority="high"></picture>{LABEL}</figure></div></section>'
  f'<section class="sec work" id="work"><div class="sec-head"><h2>Work</h2><p>Portfolio from <a class="wl" href="{IG}" target="_blank" rel="noopener">{HANDLE}</a> goes up here once the studio gives permission. Each piece will be credited to its artist.</p></div>{frames(8)}</section>'
  f'<section class="sec crew" id="artists"><div class="sec-head"><h2>Artists</h2><p>The roster changes, so only confirmed names go up. {need("current roster + consent")}</p></div>{bo()}</section>'
  +booking()+MACHINE+visit())

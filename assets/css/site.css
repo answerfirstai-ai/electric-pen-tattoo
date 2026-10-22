@@ -53,11 +53,11 @@ p{margin:0 0 1em;max-width:60ch}
 .sheet,.frame{position:relative;background:var(--paper);color:var(--ink);box-shadow:var(--sheet);transform:rotate(var(--r,0deg))}
 .pin{position:absolute;top:10px;left:50%;width:11px;height:11px;margin-left:-5px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#e9c77a,#8a6520 70%);box-shadow:0 2px 2px rgba(0,0,0,.5);z-index:2}
 /* hero: left-aligned title + framed supporting photo */
-.hero{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(24px,4vw,64px);align-items:end;padding:clamp(100px,12vw,150px) var(--g) clamp(40px,6vw,90px);min-height:min(100svh,980px)}
+.hero{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:clamp(24px,4vw,64px);align-items:end;padding:clamp(100px,12vw,150px) var(--g) clamp(40px,6vw,90px);min-height:min(100svh,980px)}
 .h-copy h1{margin-bottom:.22em}
 .lede{font-size:clamp(1.15rem,1.7vw,1.45rem);line-height:1.4;max-width:30ch;margin-bottom:1.2em}
 .addr-sm{margin:1.2em 0 0;color:var(--mute);font-size:.98rem}
-.h-media .ph{aspect-ratio:16/10;box-shadow:var(--sheet);border:10px solid #0b0f0d}
+.h-media{justify-self:end;width:100%;max-width:576px}.h-media .ph{aspect-ratio:16/10;box-shadow:var(--sheet);border:10px solid #0b0f0d}
 .h-ph img{transform-origin:55% 45%}
 /* generic section rhythm (varies per section) */
 .sec{padding:clamp(70px,9vw,140px) var(--g) 0}
@@ -113,7 +113,7 @@ p{margin:0 0 1em;max-width:60ch}
 .dnav,.nav .nav-call{display:none}.mnav{display:block}
 .hero{grid-template-columns:minmax(0,1fr);align-items:start;padding-top:92px;min-height:0;gap:26px}
 .h-copy h1{font-size:clamp(3.4rem,17vw,5.6rem)}.lede{font-size:1.12rem;margin-bottom:.9em}
-.h-media .ph{border-width:6px}
+.h-media{max-width:none}.h-media .ph{border-width:6px;aspect-ratio:1/1}
 .sec-head,.bo,.booking,.machine,.visit,.fwrap{grid-template-columns:minmax(0,1fr)}
 .salon{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:150px}
 .f-t,.f-w,.f-s,.salon .frame:nth-child(4),.salon .frame:nth-child(8){grid-column:span 1;grid-row:span 1}.salon .frame:nth-child(3n+1){grid-column:span 2}
