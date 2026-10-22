@@ -1,65 +1,49 @@
 (()=>{
 const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const $=(s,c=document)=>c.querySelector(s),$$=(s,c=document)=>[...c.querySelectorAll(s)];
-if(!window.gsap){return}
+const BASE='/electric-pen-tattoo/';
+// close mobile menu after picking a link / on Escape
+$$('.mnav a').forEach(a=>a.addEventListener('click',()=>a.closest('details').open=false));
+addEventListener('keydown',e=>{if(e.key==='Escape')$$('.mnav[open]').forEach(d=>d.open=false)});
+if(RM||!window.gsap)return;
 gsap.registerPlugin(ScrollTrigger);
-const hero=$('#hero');
-if(hero&&!RM){
-  const sheet=$('#sheet'),inner=$('.sheet-in',sheet),svg=$('.lettering',sheet);
-  const lines=$$('.ln',svg);
-  lines.forEach(p=>{const L=Math.ceil(p.getTotalLength());p.style.strokeDasharray=L;p.style.strokeDashoffset=L;p._L=L});
-  const tip=$('.tip',svg);
-  /* --- 1. Hero entrance: the needle --- */
-  const tl=gsap.timeline({defaults:{ease:'power1.inOut'}});
-  tl.from(inner,{y:-40,rotate:-3,duration:.6,ease:'back.out(1.4)'},0)
-    .from($$('.tape',inner),{scale:0,duration:.25,stagger:.05,ease:'back.out(3)'},.25);
-  const W=.55,N=lines.length,D=1.4,state={p:0};
-  const buzz=gsap.to(tip,{x:'+=2',y:'-=2',duration:.03,repeat:-1,yoyo:true,ease:'none',paused:true});
-  tl.set(tip,{opacity:1},.45).add(()=>buzz.play(),.45)
-    .to(state,{p:1,duration:D,ease:'none',onUpdate(){
-      const span=1-W, p=state.p; let act=null;
-      for(let i=0;i<N;i++){const s=i/(N-1)*span, f=Math.min(1,Math.max(0,(p-s)/W));
-        lines[i].style.strokeDashoffset=lines[i]._L*(1-f); if(f>0&&f<1)act=[lines[i],f]}
-      if(act){const pt=act[0].getPointAtLength(act[0]._L*act[1]);const m=act[0].getCTM(),sm=svg.getCTM();
-        const x=pt.x,y=pt.y,t=act[0].transform.baseVal.consolidate();const tx=t?t.matrix.e:0,ty=t?t.matrix.f:0;
-        tip.setAttribute('cx',x+tx);tip.setAttribute('cy',y+ty)}
-    }},.45)
-    .add(()=>{buzz.pause();gsap.to(tip,{opacity:0,duration:.2})},.45+D);
-  const cx=tip.getAttribute('cx');
-  ['.fill-r','.fill-g','.fill-y'].forEach((c,i)=>{
-    tl.fromTo($(c,svg),{opacity:1,clipPath:'circle(0% at 50% 55%)'},{clipPath:'circle(150% at 50% 55%)',duration:.35,ease:'power2.out'},1.85+i*.12)});
-  tl.to($('.shadow',svg),{opacity:1,duration:.3},2.2).to($('.halftone',svg),{opacity:1,duration:.3},2.4)
-    .from('.hero-copy .ctas .btn',{y:16,opacity:0,duration:.4,stagger:.08,ease:'power3.out'},2.55)
-    .from('.hero .lede',{y:12,duration:.4,ease:'power3.out'},2.5)
-    .from('.sticker',{scale:1.4,rotate:12,opacity:0,duration:.3,ease:'back.out(2.5)'},2.8);
-  /* --- 2. Ch.1 The wall: pull back --- */
-  const mm=gsap.matchMedia();
-  mm.add({d:'(min-width:901px)',m:'(max-width:900px)'},ctx=>{
-    const ws=$$('.ws');ws.forEach(w=>w.classList.remove('slot'));
-    const slot=ws[ctx.conditions.d?7:4];slot.classList.add('slot');
-    const others=ws.filter(w=>w!==slot&&getComputedStyle(w).display!=='none');
-    const geo=()=>{const a=sheet.getBoundingClientRect(),b=slot.getBoundingClientRect();
-      gsap.set(sheet,{x:0,y:0,xPercent:-50,yPercent:-50,scale:1});const a2=sheet.getBoundingClientRect();
-      return {s:Math.min(b.width/a2.width,b.height/a2.height),x:(b.left+b.width/2)-(a2.left+a2.width/2),y:(b.top+b.height/2)-(a2.top+a2.height/2)}};
-    let g=geo();
-    const st=gsap.timeline({scrollTrigger:{trigger:hero,start:'top top',end:'+=150%',pin:true,scrub:.8,invalidateOnRefresh:true,onRefreshInit:()=>{g=geo()}}});
-    st.to(sheet,{scale:()=>g.s,x:()=>g.x,y:()=>g.y,ease:'power2.inOut',duration:1},0)
-      .to('.hero-copy,.scrollcue',{opacity:0,y:30,duration:.3},0)
-      .fromTo(others,{autoAlpha:0,x:()=>gsap.utils.random(-600,600),y:()=>gsap.utils.random(-500,500),rotate:()=>gsap.utils.random(-40,40),scale:1.3},
-        {autoAlpha:1,x:0,y:0,rotate:(i,el)=>el.style.getPropertyValue('--r')||0,scale:1,ease:'power3.out',duration:.75,stagger:{each:.03,from:'center'}},.15);
-    return ()=>{};
-  });
+const desk=matchMedia('(min-width:901px)').matches, fine=matchMedia('(pointer:fine)').matches;
+/* 1. Hero "lights up": only the photo + light move; text is visible and clickable from frame 0 */
+const himg=$('.hero .h-ph img');
+if(himg){
+  const tl=gsap.timeline({defaults:{ease:'power2.out'}});
+  tl.fromTo(himg,{filter:'brightness(.35) blur(6px)',scale:1.1},{filter:'brightness(1) blur(0px)',scale:1,duration:2.2},0)
+  const skip=()=>{tl.progress(1);off()};const ev=['wheel','touchstart','keydown','pointerdown'];
+  const off=()=>ev.forEach(e=>removeEventListener(e,skip));ev.forEach(e=>addEventListener(e,skip,{passive:true,once:true}));
+  // scroll: slow push-in + parallax (no pin)
+  gsap.to(himg,{yPercent:6,scale:1.05,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
+  if(desk&&fine){const m=$('.hero');m.addEventListener('pointermove',e=>{const x=e.clientX/innerWidth-.5,y=e.clientY/innerHeight-.5;gsap.to(himg,{x:x*-14,y:y*-8,duration:1.2,ease:'power2.out'})})}
 }
-if(!RM){
-  /* artist sheets tilt in; flash pieces drop; booking steps draw */
-  $$('.acard,.fl,.scard,.vcard').forEach(el=>gsap.from(el,{y:40,rotate:-4,opacity:0,duration:.5,ease:'back.out(1.2)',scrollTrigger:{trigger:el,start:'top 88%',once:true}}));
-  $$('.step').forEach(el=>{const p=$('.sp',el),L=p.getTotalLength();gsap.set(p,{strokeDasharray:L,strokeDashoffset:L});
-    gsap.timeline({scrollTrigger:{trigger:el,start:'top 80%',end:'top 40%',scrub:true}}).to(p,{strokeDashoffset:0,ease:'none'}).from(el,{opacity:.3,x:30,ease:'none'},0)});
-  $$('.about h2,.banner-h').forEach(el=>gsap.from(el,{y:30,opacity:0,duration:.6,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 90%'}}));
-  /* magnetic sticker / buttons on fine pointer */
-  if(matchMedia('(pointer:fine)').matches){
-    $$('.btn-y').forEach(b=>{b.addEventListener('pointermove',e=>{const r=b.getBoundingClientRect();gsap.to(b,{x:(e.clientX-r.left-r.width/2)*.18,y:(e.clientY-r.top-r.height/2)*.25,duration:.3})});
-      b.addEventListener('pointerleave',()=>gsap.to(b,{x:0,y:0,duration:.5,ease:'elastic.out(1,.4)'}))});
+/* parallax layers */
+$$('.par').forEach(el=>gsap.fromTo(el,{yPercent:6},{yPercent:-6,ease:'none',scrollTrigger:{trigger:el,start:'top bottom',end:'bottom top',scrub:true}}));
+/* rack-focus reveals on images (content stays readable) */
+$$('.bk-media img').forEach(img=>gsap.fromTo(img,{scale:1.08,filter:'blur(6px)'},{scale:1,filter:'blur(0px)',duration:1.4,ease:'power2.out',scrollTrigger:{trigger:img,start:'top 85%',once:true}}));
+/* 2. Machine: desktop live 3D (pin ≤ 1 viewport), mobile image sequence (no pin) */
+$$('.machine').forEach(sec=>{
+  const stage=$('.m-canvas',sec);let prog={p:0};
+  if(desk){
+    gsap.to(prog,{p:1,ease:'none',scrollTrigger:{trigger:sec,start:'top bottom',end:'bottom top',scrub:.8}});
+    const webgl=(()=>{try{return !!document.createElement('canvas').getContext('webgl2')}catch(e){return false}})();
+    if(!webgl)return;
+    const io=new IntersectionObserver(async es=>{if(!es[0].isIntersecting)return;io.disconnect();
+      try{const {mount}=await import(BASE+'assets/js/machine3d.js');const m=mount(stage,{dpr:1.5});sec.classList.add('has3d');
+        let vis=true;new IntersectionObserver(e=>{vis=e[0].isIntersecting;m.renderer.setAnimationLoop(vis?loop:null)}).observe(sec);
+        const loop=()=>{m.set(prog.p);m.render()};m.renderer.setAnimationLoop(loop);addEventListener('resize',m.size);
+        if(fine)sec.addEventListener('pointermove',e=>m.pointer(e.clientX/innerWidth-.5));
+      }catch(e){/* static photo stays */}
+    },{rootMargin:'100% 0px'});io.observe(sec);
+  }else{
+    const N=36,img=new Image();img.alt='';img.width=540;img.height=540;let loaded=false,cur=-1;
+    const src=i=>`${BASE}assets/img/seq/m${String(i).padStart(2,'0')}.webp`;
+    const io=new IntersectionObserver(es=>{if(!es[0].isIntersecting||loaded)return;loaded=true;io.disconnect();
+      for(let i=0;i<N;i++){const p=new Image();p.src=src(i)}img.src=src(0);stage.appendChild(img);sec.classList.add('hasseq');
+      ScrollTrigger.create({trigger:sec,start:'top bottom',end:'bottom top',onUpdate:s=>{const i=Math.round(s.progress*(N-1));if(i!==cur){cur=i;img.src=src(i)}}});
+    },{rootMargin:'50% 0px'});io.observe(sec);
   }
-}
+});
 })();
