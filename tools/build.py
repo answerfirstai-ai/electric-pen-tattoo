@@ -7,7 +7,7 @@ IG='https://www.instagram.com/theelectricpentattoo/'
 DIR='https://www.google.com/maps/search/?api=1&query=The+Electric+Pen+Tattoo+Studio+10751+Magnolia+Blvd+North+Hollywood+CA+91601'
 YELP='https://www.yelp.com/biz/the-electric-pen-tattoo-studio-north-hollywood'
 TDO='https://www.tattoodo.com/studios/ELECTRIC_PEN_TATTOO/'
-V='17'
+V='18'
 def need(t): return f'<span class="need">[NEED: {t}]</span>'
 NAV=[('On the wall','flash/'),('Artists','artists/'),('Visit','visit/')]
 def head(title,desc,path,extra='',extra_pre=''):
@@ -70,12 +70,12 @@ def footer():
 <div class="mbar"><a class="btn btn-y" href="{TEL}">Call</a><a class="btn btn-o" href="{DIR}" target="_blank" rel="noopener">Directions</a></div>'''
 def wall_sec(h='h2'):
     return f'''<section class="sec wallsec" id="work"><{h} class="sec-t">On the wall</{h}><div class="wall">
-<figure class="sheet s-big s-flash" style="--r:-.6deg">{pin()}<picture><source type="image/avif" srcset="{BASE}assets/img/flash-600.avif 600w, {BASE}assets/img/flash-1024.avif 1024w" sizes="(min-width:901px) 50vw, 92vw"><img src="{BASE}assets/img/flash-1024.webp" srcset="{BASE}assets/img/flash-600.webp 600w, {BASE}assets/img/flash-1024.webp 1024w" sizes="(min-width:901px) 50vw, 92vw" width="1024" height="768" alt="Illustrative: original AI-generated flash sheet with a moth, a hand holding a key, a snake around a lantern, a peony, a crescent eye and a dagger through a lemon" loading="lazy" decoding="async"></picture><figcaption class="cap">Illustrative flash, AI-generated. Not the studio\'s work.</figcaption></figure>
+<div class="sheet s-big s-port" style="--r:-.6deg">{pin()}<p class="f-t">Your portfolio goes here</p><div class="pf"><div class="pf-frame" style="--r:-1.2deg"><span class="pf-l">Your portfolio goes here</span></div><div class="pf-frame" style="--r:.8deg"><span class="pf-l">Your portfolio goes here</span></div><div class="pf-frame" style="--r:-.4deg"><span class="pf-l">Your portfolio goes here</span></div><div class="pf-frame" style="--r:1.1deg"><span class="pf-l">Your portfolio goes here</span></div></div><p class="cap">Empty frames for the studio\'s own flash and healed work, added only with permission and artist credit.</p></div>
+<div class="sheet s-svc s1" style="--r:.9deg">{pin()}{tag("listed")}<svg class="sk" viewBox="0 0 48 48" aria-hidden="true"><path d="M8 40 L30 18 M30 18 l6-6 4 4-6 6 M14 34 l-4 4"/><circle cx="40" cy="10" r="3"/></svg><h3>Custom tattoos</h3><p>Listings say the studio does custom work. Bring a reference; every piece is priced by quote.</p></div>
+<div class="sheet s-svc s2" style="--r:-1.1deg">{pin()}{tag("listed")}<svg class="sk" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="26" r="12"/><circle cx="36" cy="26" r="3"/></svg><h3>Piercing</h3><p>Listings mention piercing. Call ahead to check who is in.</p></div>
+<div class="sheet s-svc s3" style="--r:.5deg">{pin()}{tag("listed")}<svg class="sk" viewBox="0 0 48 48" aria-hidden="true"><rect x="7" y="10" width="34" height="28"/><path d="M12 33 l9-10 6 6 5-5 5 9"/></svg><h3>Gallery</h3><p>Listings mention an art gallery. Ask at the counter what is up now.</p></div>
 <div class="sheet s-need" style="--r:.4deg">{pin()}{tag("work")}<span class="need">[NEED: shop photos of flash and healed work, from <a href="{IG}" target="_blank" rel="noopener">@theelectricpentattoo</a>, with permission and artist credit]</span></div>
-<div class="sheet s-svc" style="--r:.9deg">{pin()}{tag("listed")}<h3>Custom tattoos</h3></div>
-<div class="sheet s-svc s2" style="--r:-1.1deg">{pin()}{tag("listed")}<h3>Piercing</h3></div>
-<div class="sheet s-svc s3" style="--r:.5deg">{pin()}{tag("listed")}<h3>Gallery</h3></div>
-<p class="wall-note">Listings describe custom work, piercing and an art gallery. Ask at the counter.</p></div></section>'''
+</div></section>'''
 def consult_sec(h='h2'):
     L=["Bring a reference, or pick a sheet off the wall.","Size, placement and a quote at the counter.",f"Deposit and date. {need('deposit policy')}"]
     return f'''<section class="sec consult" id="booking"><div class="sheet rules" style="--r:.5deg">{pin()}{tag("house rules")}<{h}>Getting a consult</{h}><ol>'''+''.join(f'<li><span class="nc">{i+1}</span>{t}</li>' for i,t in enumerate(L))+f'''</ol><div class="ctas">{ctas_core()}</div></div>
