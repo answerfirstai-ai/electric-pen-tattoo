@@ -6,7 +6,6 @@ NAME='The Electric Pen Tattoo Studio'; PHONE='(818) 506-8828'; TEL='tel:+1818506
 IG='https://www.instagram.com/theelectricpentattoo/'
 DIR='https://www.google.com/maps/search/?api=1&query=The+Electric+Pen+Tattoo+Studio+10751+Magnolia+Blvd+North+Hollywood+CA+91601'
 YELP='https://www.yelp.com/biz/the-electric-pen-tattoo-studio-north-hollywood'
-TDO='https://www.tattoodo.com/studios/ELECTRIC_PEN_TATTOO/'
 V='19'
 def need(t): return f'<span class="need">[NEED: {t}]</span>'
 NAV=[('On the wall','flash/'),('Artists','artists/'),('Visit','visit/')]
@@ -30,7 +29,7 @@ def footer(body=''):
     fn=("The machine on this page is a 3D illustration, not the studio's equipment. " if 'machine-' in body else '')+("The hero scene is an AI illustration. " if 'hero-d-' in body else '')
     return f'''<footer class="foot"><div class="fwrap"><div><p class="fname">{NAME}</p><p>10751 Magnolia Blvd, North Hollywood, CA 91601</p>
 <p><a class="wl" href="{TEL}">{PHONE}</a></p><p>Open daily, 12 PM to 8 PM</p></div><nav class="fnav" aria-label="Footer"><p class="flab">Pages</p><a class="wl" href="{BASE}">Home</a><a class="wl" href="{BASE}artists/">Artists</a><a class="wl" href="{BASE}flash/">Work</a><a class="wl" href="{BASE}visit/">Visit</a></nav>
-<div><p class="flab">Find us elsewhere</p><p><a class="wl" href="{IG}" target="_blank" rel="noopener">Instagram</a> · <a class="wl" href="{YELP}" target="_blank" rel="noopener">Yelp</a> · <a class="wl" href="{TDO}" target="_blank" rel="noopener">Tattoodo</a></p>
+<div><p class="flab">Find us elsewhere</p><p><a class="wl" href="{IG}" target="_blank" rel="noopener">Instagram</a> · <a class="wl" href="{YELP}" target="_blank" rel="noopener">Yelp</a></p>
 <p class="fnote">Images marked “Illustrative scene” are AI-generated or rendered. They are not photos of The Electric Pen, its people or its tattoo work.</p></div></div></footer>
 <div class="mbar"><a class="btn btn-y" href="{TEL}">Call</a><a class="btn btn-o" href="{DIR}" target="_blank" rel="noopener">Directions</a></div>'''
 SCRIPTS=f'<script src="{BASE}assets/js/gsap.min.js" defer></script><script src="{BASE}assets/js/ScrollTrigger.min.js" defer></script><script src="{BASE}assets/js/site.js?v={V}" defer></script>'
@@ -44,7 +43,7 @@ ALL=[]
 BUSINESS={"@type":["TattooParlor","LocalBusiness"],"@id":SITE+"#studio","name":NAME,"url":SITE,"telephone":"+1-818-506-8828",
  "logo":SITE+"assets/img/icon-512.png",
  "address":{"@type":"PostalAddress","streetAddress":"10751 Magnolia Blvd","addressLocality":"North Hollywood","addressRegion":"CA","postalCode":"91601","addressCountry":"US"},
- "areaServed":"North Hollywood, CA","geo":{"@type":"GeoCoordinates","latitude":34.1650733,"longitude":-118.3655833},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"12:00","closes":"20:00"}],"hasMap":DIR,"sameAs":[IG,YELP,TDO],
+ "areaServed":"North Hollywood, CA","geo":{"@type":"GeoCoordinates","latitude":34.1650733,"longitude":-118.3655833},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"12:00","closes":"20:00"}],"hasMap":DIR,"sameAs":[IG,YELP],
  "knowsAbout":["Tattooing"],"image":{"@type":"ImageObject","url":SITE+"assets/img/og.jpg","creditText":"Illustrative (AI-generated)"}}
 def ld(path,crumb=None):
     g=[dict(BUSINESS,**{"@context":"https://schema.org"})] if not crumb else [{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
@@ -67,7 +66,7 @@ def footer(body=''):
     fn=("The machine on this page is a 3D illustration, not the studio's equipment. " if 'machine-' in body else '')+("The hero scene is an AI illustration. " if 'hero-d-' in body else '')
     return f'''<footer class="foot"><div class="sheet f-sheet" style="--r:-.4deg">{pin()}{tag("last sheet")}<p class="fname">The Electric Pen</p>
 <p>10751 Magnolia Blvd, North Hollywood 91601. <a class="wl" href="{TEL}">{PHONE}</a>. Open daily, 12 to 8.</p>
-<nav class="fnav" aria-label="Footer"><a class="wl" href="{BASE}">Home</a><a class="wl" href="{BASE}flash/">On the wall</a><a class="wl" href="{BASE}artists/">Artists</a><a class="wl" href="{BASE}visit/">Visit</a><a class="wl" href="{IG}" target="_blank" rel="noopener">Instagram</a><a class="wl" href="{YELP}" target="_blank" rel="noopener">Yelp</a><a class="wl" href="{TDO}" target="_blank" rel="noopener">Tattoodo</a></nav>
+<nav class="fnav" aria-label="Footer"><a class="wl" href="{BASE}">Home</a><a class="wl" href="{BASE}flash/">On the wall</a><a class="wl" href="{BASE}artists/">Artists</a><a class="wl" href="{BASE}visit/">Visit</a><a class="wl" href="{IG}" target="_blank" rel="noopener">Instagram</a><a class="wl" href="{YELP}" target="_blank" rel="noopener">Yelp</a></nav>
 <p class="fnote">{fn}Map data © OpenStreetMap contributors.</p></div></footer>
 <div class="mbar"><a class="btn btn-y" href="{TEL}">Call</a><a class="btn btn-o" href="{DIR}" target="_blank" rel="noopener">Directions</a></div>'''
 def wall_sec(h='h2'):
@@ -78,9 +77,9 @@ def wall_sec(h='h2'):
 <div class="sheet s-svc s3" style="--r:.5deg">{pin()}{tag("listed")}<svg class="sk" viewBox="0 0 48 48" aria-hidden="true"><rect x="7" y="10" width="34" height="28"/><path d="M12 33 l9-10 6 6 5-5 5 9"/></svg><h3>Gallery</h3><p>Listings mention an art gallery. Ask at the counter what is up now.</p></div>
 </div></section>'''
 def consult_sec(h='h2'):
-    L=["Bring a reference, or pick a sheet off the wall.","Size, placement and a quote at the counter.",f"Deposit and date. {need('deposit policy')}"]
+    L=["Bring a reference, or pick a sheet off the wall.","Size, placement and a quote at the counter.",f"Deposit and date. <a href=\"{TEL}\">Call to confirm the deposit.</a>"]
     return f'''<section class="sec consult" id="booking"><div class="sheet rules" style="--r:.5deg">{pin()}{tag("house rules")}<{h}>Getting a consult</{h}><ol>'''+''.join(f'<li><span class="nc">{i+1}</span>{t}</li>' for i,t in enumerate(L))+f'''</ol><div class="ctas">{ctas_core()}</div></div>
-<p class="side-note">Every piece is priced by quote. {need("ID/age policy")} {need("aftercare instructions")}</p></section>'''
+<p class="side-note">Every piece is priced by quote. Ask about ID requirements and aftercare when you <a href="{TEL}">call</a>.</p></section>'''
 def artists_sec(h='h2'):
     return f'''<section class="sec artists" id="artists"><{h} class="sec-t">Artists</{h}><div class="tags-row">
 <div class="sheet ntag" style="--r:-1.5deg">{pin()}<p class="nt-h">Hello, my name is</p><p class="nt-n">Bo Adams</p><p class="nt-r">Owner</p></div>
@@ -100,7 +99,7 @@ page('artists/','Tattoo Artists | The Electric Pen Tattoo Studio, North Hollywoo
 page('flash/','On the Wall | The Electric Pen Tattoo Studio, North Hollywood','Custom tattoos, piercing and gallery at The Electric Pen Tattoo Studio, 10751 Magnolia Blvd, North Hollywood. Call (818) 506-8828.',
  f'<section class="phead"><h1>On the wall</h1><p class="lede">The studio\'s own flash and healed work go up here once it sends photos. Until then, call or visit to see the books.</p></section>'+wall_sec('h2').replace('<h2 class="sec-t">On the wall</h2>','<h2 class="vh">Sheets</h2>')+MACHINE,'flash/',ld('flash/','On the wall'))
 page('visit/','Visit & Hours | The Electric Pen Tattoo Studio, Magnolia Blvd NoHo','The Electric Pen Tattoo Studio is at 10751 Magnolia Blvd, North Hollywood, open daily 12-8 PM. Directions, map and how a consult works.',
- f'<section class="phead"><h1>Visit</h1><p class="lede">10751 Magnolia Blvd, North Hollywood. Open daily, 12 to 8. {need("parking details")}</p></section>'+visit_sec()+consult_sec(),'visit/',ld('visit/','Visit'))
+ f'<section class="phead"><h1>Visit</h1><p class="lede">10751 Magnolia Blvd, North Hollywood. Open daily, 12 to 8. For parking, <a href="{TEL}">call to confirm</a>.</p></section>'+visit_sec()+consult_sec(),'visit/',ld('visit/','Visit'))
 nf=f'<section class="phead nf"><h1>Page not found</h1><p class="lede">This sheet fell off the wall. Head back home or call the studio.</p><div class="ctas"><a class="btn btn-y" href="{BASE}">Back home</a><a class="btn btn-o" href="{TEL}">Call {PHONE}</a></div></section>'
 page('404.html','Page not found | The Electric Pen Tattoo Studio','That page is not here. Head back to The Electric Pen Tattoo Studio home page.',nf,'404',None)
 s=open(os.path.join(ROOT,'404.html')).read().replace('<head>','<head><meta name="robots" content="noindex">',1); open(os.path.join(ROOT,'404.html'),'w').write(s)
